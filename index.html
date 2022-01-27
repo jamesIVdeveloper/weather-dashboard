@@ -4,7 +4,35 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Weather Dashboard</title>
   </head>
-  <body></body>
+  <body>
+    <!-- header -->
+    <header>
+      <h1>Weather DashBoard</h1>
+    </header>
+
+    <!-- main -->
+    <main>
+      <div class="container">
+        <!-- form -->
+        <form>
+          <label for="city">Search for a city:</label>
+          <input type="text" id="city-name" />
+        </form>
+
+        <!-- previous searches -->
+        <div id="previous-searches">
+          <ul id="searched-list"></ul>
+        </div>
+
+        <!-- weather data -->
+        <div id="current-weather"></div>
+        <div id="five-day-forecast"></div>
+      </div>
+    </main>
+
+    <script src="./assets/js/script.js"></script>
+  </body>
 </html>
