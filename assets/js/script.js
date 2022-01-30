@@ -53,6 +53,9 @@ cityFormEl.addEventListener("submit", formSubmitHandler);
 
 // display current weather
 var displayCurrentWeather = function (data, searchTerm) {
+  currentTitleEl.textContent = "";
+  currentDataList.textContent = "";
+
   currentTitleEl.textContent = searchTerm + " " + data.weather[0].icon;
 
   var tempEl = document.createElement("li");
@@ -100,7 +103,7 @@ var getFiveDayForecast = function (city) {
 
 // display five day forecast
 var displayFiveDayForecast = function (data) {
-  console.log("working");
+  fiveDayEl.textContent = "";
 
   // loop through list
   for (var i = 0; i < data.list.length; i += 8) {
@@ -113,6 +116,7 @@ var displayFiveDayForecast = function (data) {
 
     // create a container for each day
     var dayEl = document.createElement("div");
+    dayEl.classList = "border border-dark p-2 m-2 bg-secondary text-light";
 
     // create h4 for date
     var dayDateEl = document.createElement("h4");
