@@ -1,3 +1,5 @@
+var cities = {};
+
 var currentWeatherEl = document.querySelector("#current-weather");
 var cityInputEl = document.querySelector("#city-name");
 var cityFormEl = document.querySelector("#city-form");
@@ -5,6 +7,7 @@ var currentTitleEl = document.querySelector("#city-date-icon");
 var weatherDataEl = document.querySelector("#weather-data");
 var currentDataList = document.querySelector("#current-data-list");
 var fiveDayEl = document.querySelector("#five-day-forecast");
+var searchedList = document.querySelector("#searched-list");
 
 // handle form submit
 var formSubmitHandler = function (event) {
@@ -13,12 +16,27 @@ var formSubmitHandler = function (event) {
   var city = cityInputEl.value.trim();
 
   if (city) {
+    localStorage.setItem("city", city);
     getCurrentWeather(city);
     getFiveDayForecast(city);
     cityInputEl.value = "";
   } else {
     alert("Please enter a City");
   }
+};
+
+// load cities
+var loadCities = function () {
+  cities = JSON.parse(localStorage("cities"));
+
+  if (!cities) {
+    cities = [];
+  }
+};
+
+// save city searches to local storage
+var saveCity = function () {
+  localStorage.setItem("city", JSON.stringify(city));
 };
 
 // fetch current weather data
@@ -144,3 +162,29 @@ var displayFiveDayForecast = function (data) {
   }
   console.log(dateEl, iconEl, tempEl, windSpeedEl, humidityEl);
 };
+
+// loop through local storage and make buttons
+for (var i = 0; i < localStorage.length; i++) {
+  // create element for local storage item
+  var storedCityEl = document.createElement("button");
+  storedCityEl.id = "searched-city";
+
+  // set local storage item
+  var storedCity = localStorage.getItem(localStorage.key(i));
+  storedCityEl.textContent = storedCity;
+
+  // append to list
+  searchedList.appendChild(storedCityEl);
+}
+
+// add event listener for searched city button
+/*
+document
+  .getElementById("#searched-city")
+  .addEventListener("click", function () {
+    var searchedCityEl = document.getElementById("#searched-city");
+    var searchedCity = searchedCityEl.value.trim();
+    getCurrentWeather(searchedCity);
+    getFiveDayForecast(searchedCity);
+  });
+*/
